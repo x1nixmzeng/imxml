@@ -1,8 +1,8 @@
-#include "xml.h"
+#include "imxml.h"
 
 const unsigned short xml_doc[] = L"<?xml version=\"1.0\"?><node></node>";
 
-void xml_show_context(Xml* xml);
+void imxml_show_context(Xml* xml);
 
 int main(int argc, char** argv)
 {
@@ -14,20 +14,21 @@ int main(int argc, char** argv)
   inst.cursor = inst.range.begin;
   inst.context = kXmlHintUnknown;
 
-  while( xml_parse(&inst) != kXmlHintEnded ) {
-    xml_show_context(&inst);
+  while( imxml_parse(&inst) != kXmlHintEnded ) {
+    imxml_show_context(&inst);
   }
 
   return 0;
 }
 
-void xml_show_context(Xml* xml)
+void imxml_show_context(Xml* xml)
 {
   unsigned short pos;
 
   pos = xml->cursor - xml->range.begin;
+  printf("0x%04X ", pos);
 
-#define WRITE_HINT(hint) case hint: printf( #hint ); break;
+#define WRITE_HINT(hint) case hint: printf( #hint "\n" ); break;
 
   switch( xml->context ) {
     WRITE_HINT(kXmlHintEnded)
@@ -49,9 +50,9 @@ void xml_show_context(Xml* xml)
     WRITE_HINT(kXmlHintEndAttributeName)
     WRITE_HINT(kXmlHintEndAttributeValue)
     WRITE_HINT(kXmlHintEndInnerText)
+    default: 
+      printf("??\n");
   }
 
 #undef WRITE_HINT
-  
-  printf(" @ 0x%04X\n", pos);
 }

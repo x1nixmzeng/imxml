@@ -1,2 +1,2 @@
 :: Requires Tiny C Compiler
-tcc -I../src/ ../src/xml.c main.c -o imxml_test.exe
+tcc -I../src/ ../src/imxml.c main.c -o imxml_test.exe

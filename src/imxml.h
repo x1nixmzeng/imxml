@@ -45,6 +45,6 @@ typedef struct XmlRange
   XmlHint context;
 } Xml;
 
-XmlHint xml_parse(Xml* xml);
+XmlHint imxml_parse(Xml* xml);
 
 #endif // IMXML_H_

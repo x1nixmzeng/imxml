@@ -1,6 +1,6 @@
-#include "xml.h"
+#include "imxml.h"
 
-void xml_skip_whitespace(Xml* xml)
+void imxml_skip_whitespace(Xml* xml)
 {
   while (xml->cursor < xml->range.end) {
     switch (*xml->cursor) {
@@ -17,7 +17,7 @@ void xml_skip_whitespace(Xml* xml)
   }
 }
 
-int xml_char(const short c)
+int imxml_char(const short c)
 {
   if ((c >= 'a' && c <= 'z')
     || (c >= 'A' && c <= 'Z')
@@ -29,7 +29,7 @@ int xml_char(const short c)
   }
 }
 
-XmlHint xml_parse(Xml* xml)
+XmlHint imxml_parse(Xml* xml)
 {
   switch (xml->context)
   {
@@ -38,7 +38,7 @@ XmlHint xml_parse(Xml* xml)
     case kXmlHintEndElementClose:
     case kXmlHintEndInnerText:
     {
-      xml_skip_whitespace(xml);
+      imxml_skip_whitespace(xml);
 
       if (*xml->cursor == '<') {
         xml->cursor++;
@@ -63,7 +63,7 @@ XmlHint xml_parse(Xml* xml)
 
     case kXmlHintEndElementOpen:
     {
-      xml_skip_whitespace(xml);
+      imxml_skip_whitespace(xml);
 
       if(*xml->cursor == '<') {
         xml->cursor++;
@@ -103,7 +103,7 @@ XmlHint xml_parse(Xml* xml)
       ++xml->cursor;
       unsigned short chr = *xml->cursor;
   
-      if (xml_char(chr) == 0) {
+      if (imxml_char(chr) == 0) {
         switch (xml->context) {
         case kXmlHintStartElementOpen:
           xml->context = kXmlHintElementOpen;
@@ -128,7 +128,7 @@ XmlHint xml_parse(Xml* xml)
       ++xml->cursor;
       unsigned short chr = *xml->cursor;
   
-      if (xml_char(chr) == 0) {
+      if (imxml_char(chr) == 0) {
         //xml->context = kXmlHintDeclaration;
       }
       else if (chr == ' ') {
@@ -151,7 +151,7 @@ XmlHint xml_parse(Xml* xml)
       ++xml->cursor;
       unsigned short chr = *xml->cursor;
   
-      if (xml_char(chr) == 0) {
+      if (imxml_char(chr) == 0) {
         //xml->context = kXmlHintElementOpen;
       }
       else if (chr == ' ') {
@@ -169,7 +169,7 @@ XmlHint xml_parse(Xml* xml)
       ++xml->cursor;
       unsigned short chr = *xml->cursor;
   
-      if (xml_char(chr) == 0) {
+      if (imxml_char(chr) == 0) {
         //xml->context = kXmlHintElementClose;
       } else if (chr == '>') {
         ++xml->cursor;
@@ -188,7 +188,7 @@ XmlHint xml_parse(Xml* xml)
       ++xml->cursor;
       unsigned short chr = *xml->cursor;
 
-      if (xml_char(chr) == 0) {
+      if (imxml_char(chr) == 0) {
         xml->context = kXmlHintAttributeName;
       } else if (chr == '=') {
         ++xml->cursor;
@@ -216,7 +216,7 @@ XmlHint xml_parse(Xml* xml)
       ++xml->cursor;
       unsigned short chr = *xml->cursor;
 
-      if (xml_char(chr) == 0) {
+      if (imxml_char(chr) == 0) {
         xml->context = kXmlHintAttributeValue;
       } else if (chr == '"') {
         xml->context = kXmlHintEndAttributeValue;
@@ -231,7 +231,7 @@ XmlHint xml_parse(Xml* xml)
       ++xml->cursor;
       unsigned short chr = *xml->cursor;
 
-      if (xml_char(chr) == 0) {
+      if (imxml_char(chr) == 0) {
         xml->context = kXmlHintAttributeValue;
       } else if (chr == '"') {
         xml->context = kXmlHintEndAttributeValue;

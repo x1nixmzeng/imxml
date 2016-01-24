@@ -13,7 +13,7 @@ The library was inspired by the yaml library by Yoran Heling.
 ## Usage
 
 * Create a range for your XML input
-* Repeatedly call **xml_parse** until you are returned `kXmlHintEnded`
+* Repeatedly call **imxml_parse** until you are returned `kXmlHintEnded`
 
 Hints are returned for the following contexts:
 
@@ -48,7 +48,7 @@ Hints are returned for the following contexts:
 ## Examples
 
 ```cpp
-XmlHint xml_skip_declaration(Xml *xml)
+XmlHint imxml_skip_declaration(Xml *xml)
 {
   int loop;
 
