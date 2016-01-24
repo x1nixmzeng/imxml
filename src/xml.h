@@ -40,7 +40,7 @@ typedef struct XmlTextRange
 
 typedef struct XmlRange
 {
-  XmlRange *range;
+  XmlRange range;
   const short* cursor;
   XmlHint context;
 } Xml;

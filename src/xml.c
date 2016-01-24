@@ -2,7 +2,7 @@
 
 void xml_skip_whitespace(Xml* xml)
 {
-  while (xml->cursor < xml->range->end) {
+  while (xml->cursor < xml->range.end) {
     switch (*xml->cursor) {
       case 0:
       case ' ':
@@ -175,7 +175,7 @@ XmlHint xml_parse(Xml* xml)
         ++xml->cursor;
         xml->context = kXmlHintEndElementClose;
 
-        if (xml->cursor == xml->range->end) {
+        if (xml->cursor == xml->range.end) {
           xml->context = kXmlHintEnded;
         }
       }
