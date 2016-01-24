@@ -1,23 +1,4 @@
 #include "xml.h"
-#include "memory.h"
-
-void xml_create(Xml** xml)
-{
-  *xml = (Xml*)mem_alloc(sizeof(Xml));
-  
-  (*xml)->range = 0;
-  (*xml)->cursor = 0;
-  (*xml)->context = kXmlHintUnknown;
-  
-  wrange_create(&(*xml)->range);
-}
-
-void xml_destroy(Xml** xml)
-{
-  wrange_destroy(&(*xml)->range);
-
-  mem_free(*xml);
-}
 
 void xml_skip_whitespace(Xml* xml)
 {

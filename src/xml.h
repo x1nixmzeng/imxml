@@ -1,7 +1,5 @@
-#ifndef XML_HEADER_H
-#define XML_HEADER_H
-
-#include "wtextrange.h"
+#ifndef IMXML_H_
+#define IMXML_H_
 
 // Heavily inspired by yxml library by Yoran Heling
 // to support parsing utf-16 text ranges
@@ -34,16 +32,19 @@ typedef enum
 
 } XmlHint;
 
+typedef struct XmlTextRange
+{
+  const short *begin;
+  const short *end;
+} XmlRange;
+
 typedef struct XmlRange
 {
-  WRange *range;
+  XmlRange *range;
   const short* cursor;
   XmlHint context;
 } Xml;
 
-void xml_create(Xml** xml);
-void xml_destroy(Xml** xml);
-
 XmlHint xml_parse(Xml* xml);
 
-#endif
+#endif // IMXML_H_

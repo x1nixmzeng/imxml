@@ -43,7 +43,6 @@ Hints are returned for the following contexts:
 ## Future
 
 * Support for unescaping inner text (such as `&nsbp;`)
-* No dependencies on `memory.h` or `wtextrange.h`
 
 
 ## Examples
